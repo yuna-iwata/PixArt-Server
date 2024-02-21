@@ -7,6 +7,7 @@ const resolvers = {
   },
   Mutation: {
     ...pixartResolver.Mutation,
+    ...usersResolver.Mutation,
   },
 };
 

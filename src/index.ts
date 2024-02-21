@@ -3,12 +3,10 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import { connect } from "mongoose";
 import resolvers from "../graphql/resolvers/index.js";
 import typeDefs from "../graphql/typeDefs.js";
-
-const MONGODB =
-  "mongodb+srv://yunaiwata:jrUg7w5ynZPVfX92@cluster0.cvc9tg9.mongodb.net/PixArt?retryWrites=true&w=majority";
+import "dotenv/config";
 
 async function run() {
-  await connect(MONGODB);
+  await connect(process.env.MONGODB);
 
   const server = new ApolloServer({ typeDefs, resolvers });
 
