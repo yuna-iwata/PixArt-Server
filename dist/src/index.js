@@ -1,54 +1,54 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { connect } from "mongoose";
-import Book from "../models/book.js";
-const MONGODB = "mongodb+srv://yunaiwata:jrUg7w5ynZPVfX92@cluster0.cvc9tg9.mongodb.net/Books?retryWrites=true&w=majority";
+import PixArt from "../models/PixArt.js";
+const MONGODB = "mongodb+srv://yunaiwata:jrUg7w5ynZPVfX92@cluster0.cvc9tg9.mongodb.net/PixArt?retryWrites=true&w=majority";
 const typeDefs = `#graphql
-    type Book {
+    type PixArt {
         _id: String
-        author: String
+        username: String
         title: String
-        year: Int
+        createdAt: String
     }
 
-    input BookInput {
-        author: String
+    input PixArtInput {
+        username: String
         title: String
-        year: Int
+        createdAt: String
     }
 
     type Query {
-        getBook(ID: ID!): Book!
-        getBooks(limit:Int): [Book]
+        getPixArt(ID: ID!): PixArt!
+        getAllPixArt(limit:Int): [PixArt]
     }
 
     type Mutation {
-        createBook(bookInput: BookInput): String!
-        updateBook(ID: ID!, bookInput: BookInput): String!
-        deleteBook(ID: ID!): String!
+        createPixArt(pixartInput: PixArtInput): String!
+        updatePixArt(ID: ID!, pixartInput: PixArtInput): String!
+        deletePixArt(ID: ID!): String!
     }
 
 `;
 const resolvers = {
     Query: {
-        async getBook(_, { ID }) {
-            return await Book.findById(ID);
+        async getPixArt(_, { ID }) {
+            return await PixArt.findById(ID);
         },
-        async getBooks(_, { limit }) {
-            return await Book.find().limit(limit);
+        async getAllPixArt() {
+            return await PixArt.find();
         },
     },
     Mutation: {
-        async createBook(_, { bookInput: { author, title, year } }) {
-            const res = await new Book({ author, title, year }).save();
+        async createPixArt(_, { pixartInput: { username, title, createdAt } }) {
+            const res = await new PixArt({ username, title, createdAt }).save();
             return res._id;
         },
-        async updateBook(_, { ID, bookInput: { author, title, year } }) {
-            await Book.updateOne({ _id: ID }, { $set: { author, title, year } });
+        async updatePixArt(_, { ID, bookInput: { username, title, createdAt } }) {
+            await PixArt.updateOne({ _id: ID }, { $set: { username, title, createdAt } });
             return ID;
         },
-        async deleteBook(_, { ID }) {
-            await Book.findByIdAndDelete(ID);
+        async deletePixArt(_, { ID }) {
+            await PixArt.findByIdAndDelete(ID);
             return ID;
         },
     },
