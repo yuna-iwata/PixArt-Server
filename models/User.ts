@@ -16,6 +16,6 @@ const UserSchema = new Schema<User>({
   createdAt: { type: String, required: true },
 });
 
-const Book = model<User>("users", UserSchema);
+const User = model<User>("users", UserSchema);
 
-export default Book;
+export default User;

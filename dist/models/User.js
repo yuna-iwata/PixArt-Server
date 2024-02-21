@@ -6,5 +6,5 @@ const UserSchema = new Schema({
     email: { type: String, required: true },
     createdAt: { type: String, required: true },
 });
-const Book = model("users", UserSchema);
-export default Book;
+const User = model("users", UserSchema);
+export default User;
