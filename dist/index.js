@@ -4,17 +4,12 @@ import { connect } from "mongoose";
 import resolvers from "./graphql/resolvers/index.js";
 import typeDefs from "./graphql/typeDefs.js";
 import "dotenv/config";
-
 async function run() {
-  await connect(process.env.MONGODB);
-
-  const server = new ApolloServer({ typeDefs, resolvers });
-
-  const { url } = await startStandaloneServer(server, {
-    listen: { port: 4000 },
-  });
-
-  console.log(`🚀  Server ready at: ${url}`);
+    await connect(process.env.MONGODB);
+    const server = new ApolloServer({ typeDefs, resolvers });
+    const { url } = await startStandaloneServer(server, {
+        listen: { port: 4000 },
+    });
+    console.log(`🚀  Server ready at: ${url}`);
 }
-
 run();

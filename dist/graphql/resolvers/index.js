@@ -3,6 +3,7 @@ import usersResolver from "./Users.js";
 const resolvers = {
     Query: {
         ...pixartResolver.Query,
+        ...usersResolver.Query,
     },
     Mutation: {
         ...pixartResolver.Mutation,
