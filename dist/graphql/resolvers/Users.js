@@ -12,22 +12,6 @@ const generateToken = (user) => {
     }, process.env.SECRET_KEY, { expiresIn: "1h" });
 };
 const usersResolver = {
-    Query: {
-        async getUser(_, { ID }) {
-            const user = await User.findById(ID);
-            return user;
-        },
-        async getAllUsers() {
-            const users = await User.find();
-            const usersWithId = users.map((user) => {
-                return {
-                    id: user._id,
-                    username: user.username,
-                };
-            });
-            return usersWithId;
-        },
-    },
     Mutation: {
         async login(_, { username, password }) {
             const { errors, valid } = validateLoginInput(username, password);

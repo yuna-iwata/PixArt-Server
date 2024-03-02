@@ -8,6 +8,7 @@ async function run() {
     await connect(process.env.MONGODB);
     const server = new ApolloServer({ typeDefs, resolvers });
     const { url } = await startStandaloneServer(server, {
+        context: async ({ req }) => ({ token: req.headers.token }),
         listen: { port: 4000 },
     });
     console.log(`🚀  Server ready at: ${url}`);

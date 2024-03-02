@@ -8,10 +8,10 @@ const typeDefs = `#graphql
 
     type User{
         id: ID!
-        email: String
-        token: String
+        email: String!
+        token: String!
         username: String!
-        createdAt: String
+        createdAt: String!
     }
 
     input RegisterInput{
@@ -22,21 +22,17 @@ const typeDefs = `#graphql
     }
 
     input PixArtInput {
-        username: String
         title: String
-        createdAt: String
     }
 
     type Query {
         getPixArt(ID: ID!): PixArt!
         getAllPixArt(limit:Int): [PixArt]
-        getUser(ID: ID!): User!
-        getAllUsers: [User]
     }
 
     type Mutation {
         register(registerInput: RegisterInput): User!
-        login(username: String!, password: String!): User! 
+        login(username: String!, password: String!): User!
         createPixArt(pixartInput: PixArtInput): String!
         updatePixArt(ID: ID!, pixartInput: PixArtInput): String!
         deletePixArt(ID: ID!): String!

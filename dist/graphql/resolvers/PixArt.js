@@ -9,17 +9,10 @@ const pixartResolver = {
         },
     },
     Mutation: {
-        async createPixArt(_, { pixartInput: { username, title, createdAt } }) {
-            const res = await new PixArt({ username, title, createdAt }).save();
+        async createPixArt(_, { pixartInput: { title } }, contextValue) {
+            console.log(contextValue);
+            const res = await new PixArt({ title }).save();
             return res._id;
-        },
-        async updatePixArt(_, { ID, bookInput: { username, title, createdAt } }) {
-            await PixArt.updateOne({ _id: ID }, { $set: { username, title, createdAt } });
-            return ID;
-        },
-        async deletePixArt(_, { ID }) {
-            await PixArt.findByIdAndDelete(ID);
-            return ID;
         },
     },
 };

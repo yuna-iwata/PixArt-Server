@@ -22,9 +22,7 @@ const typeDefs = `#graphql
     }
 
     input PixArtInput {
-        username: String
         title: String
-        createdAt: String
     }
 
     type Query {
