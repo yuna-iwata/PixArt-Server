@@ -1,4 +1,5 @@
 import PixArt from "../../models/PixArt.js";
+import checkAuth from "../../utils/check-auth.js";
 
 const pixartResolver = {
   Query: {
@@ -13,9 +14,16 @@ const pixartResolver = {
   Mutation: {
     async createPixArt(_, { pixartInput: { title } }, contextValue) {
       console.log(contextValue);
-      const res = await new PixArt({ title }).save();
+      const user = checkAuth(contextValue);
+      const newPixArt = await new PixArt({
+        title,
+        user: user.id,
+        username: user.username,
+        createdAt: new Date().toISOString(),
+      }).save();
 
-      return res._id;
+      const pixArt = await newPixArt.save();
+      return pixArt;
     },
   },
 };
