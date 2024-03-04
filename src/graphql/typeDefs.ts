@@ -33,8 +33,8 @@ const typeDefs = `#graphql
     type Mutation {
         register(registerInput: RegisterInput): User!
         login(username: String!, password: String!): User!
-        createPixArt(pixartInput: PixArtInput): String!
-        updatePixArt(ID: ID!, pixartInput: PixArtInput): String!
+        createPixArt(pixartInput: PixArtInput): PixArt!
+        updatePixArt(ID: ID!, pixartInput: PixArtInput): PixArt!
         deletePixArt(ID: ID!): String!
     }
 
